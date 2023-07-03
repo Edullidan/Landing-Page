@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useDebounce from "./useDebounce";
 
 function Search({ repositories, setRepositories }) {
   const [search, setSearch] = useState("");
+  const debounceSearchForm = useDebounce(search, 300);
 
   const handlePoisk = async (e) => {
     e.preventDefault();
@@ -14,13 +16,23 @@ function Search({ repositories, setRepositories }) {
     setRepositories(data.items);
   };
 
+  useEffect(() => {
+    if (debounceSearchForm) {
+      console.log("search Term", debounceSearchForm);
+    } else {
+      console.log("sdda");
+    }
+  }, [debounceSearchForm]);
+
   return (
     <div>
       <h1>Repository search</h1>
       <input
         type='text'
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
       ></input>
       <button type='submit' onClick={handlePoisk}>
         Search
