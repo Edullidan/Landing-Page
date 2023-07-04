@@ -6,8 +6,7 @@ function Search({ repositories, setRepositories }) {
   const [search, setSearch] = useState("");
   const debounceSearchForm = useDebounce(search, 300);
 
-  const handlePoisk = async (e) => {
-    e.preventDefault();
+  const handlePoisk = async () => {
     const response = await fetch(
       `https://api.github.com/search/repositories?q=${search}`
     );
@@ -18,9 +17,8 @@ function Search({ repositories, setRepositories }) {
 
   useEffect(() => {
     if (debounceSearchForm) {
-      console.log("search Term", debounceSearchForm);
-    } else {
-      console.log("sdda");
+      console.log(debounceSearchForm);
+      handlePoisk();
     }
   }, [debounceSearchForm]);
 
