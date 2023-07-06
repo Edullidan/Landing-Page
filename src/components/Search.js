@@ -1,6 +1,23 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useDebounce from "./useDebounce";
+import styled from "styled-components";
+
+const StyledDiv = styled.div`
+  background: green;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledInput = styled.input`
+  padding: 2px;
+  border: 1px solid #ccc;
+`;
+
+const StyledButton = styled.button`
+  padding: 2px;
+  border: 1px solid #ccc;
+`;
 
 function Search({ repositories, setRepositories }) {
   const [search, setSearch] = useState("");
@@ -23,18 +40,18 @@ function Search({ repositories, setRepositories }) {
   }, [debounceSearchForm]);
 
   return (
-    <div>
+    <StyledDiv>
       <h1>Repository search</h1>
-      <input
+      <StyledInput
         type='text'
         value={search}
         onChange={(e) => {
           setSearch(e.target.value);
         }}
-      ></input>
-      <button type='submit' onClick={handlePoisk}>
+      ></StyledInput>
+      <StyledButton type='submit' onClick={handlePoisk}>
         Search
-      </button>
+      </StyledButton>
       <ul>
         {repositories.map((repo) => (
           <li key={repo.id}>
@@ -42,7 +59,7 @@ function Search({ repositories, setRepositories }) {
           </li>
         ))}
       </ul>
-    </div>
+    </StyledDiv>
   );
 }
 
