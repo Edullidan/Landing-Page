@@ -24,16 +24,16 @@ const StyledInput = styled.input`
   display: block;
   font-size: 1.1rem;
   background-color: #3b3b4f;
-  color: white; /* Добавлен стиль для текста внутри поля ввода */
-  padding: 5px; /* Добавлен отступ для текста внутри поля ввода */
-  border: none; /* Убрана граница поля ввода */
+  color: white;
+  padding: 5px;
+  border: none;
 `;
 
 const StyledButton = styled.button`
   padding: 2px;
   border: 1px solid #ccc;
   background-color: #195135;
-  color: white; /* Добавлен стиль для текста на кнопке */
+  color: white;
 `;
 
 const StyledLink = styled(Link)`
