@@ -1,43 +1,63 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useDebounce from "./useDebounce";
 import styled from "styled-components";
 
 const StyledDiv = styled.div`
-  background: green;
   justify-content: center;
   align-items: center;
 `;
 
+const StyledList = styled.ul`
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid black;
+  background-color: #195135;
+  justify-content: space-between;
+  align-items: flex-end;
+  letter-spacing: 0.15px;
+`;
+
 const StyledInput = styled.input`
-  padding: 2px;
-  border: 1px solid #ccc;
+  display: block;
+  font-size: 1.1rem;
+  background-color: #3b3b4f;
+  color: white; /* Добавлен стиль для текста внутри поля ввода */
+  padding: 5px; /* Добавлен отступ для текста внутри поля ввода */
+  border: none; /* Убрана граница поля ввода */
 `;
 
 const StyledButton = styled.button`
   padding: 2px;
   border: 1px solid #ccc;
+  background-color: #195135;
+  color: white; /* Добавлен стиль для текста на кнопке */
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: black;
 `;
 
 function Search({ repositories, setRepositories }) {
   const [search, setSearch] = useState("");
   const debounceSearchForm = useDebounce(search, 300);
 
-  const handlePoisk = async () => {
+  const handlePoisk = useCallback(async () => {
     const response = await fetch(
       `https://api.github.com/search/repositories?q=${search}`
     );
     const data = await response.json();
     console.log(data);
     setRepositories(data.items);
-  };
+  }, [search, setRepositories]);
 
   useEffect(() => {
     if (debounceSearchForm) {
-      console.log(debounceSearchForm);
       handlePoisk();
     }
-  }, [debounceSearchForm]);
+  }, [debounceSearchForm, handlePoisk]);
 
   return (
     <StyledDiv>
@@ -52,13 +72,14 @@ function Search({ repositories, setRepositories }) {
       <StyledButton type='submit' onClick={handlePoisk}>
         Search
       </StyledButton>
-      <ul>
-        {repositories.map((repo) => (
-          <li key={repo.id}>
-            <Link to={`/repo/${repo.id}`}>{repo.name}</Link>
-          </li>
-        ))}
-      </ul>
+      <StyledList>
+        {repositories &&
+          repositories.map((repo) => (
+            <li key={repo.id}>
+              <StyledLink to={`/repo/${repo.id}`}>{repo.name}</StyledLink>
+            </li>
+          ))}
+      </StyledList>
     </StyledDiv>
   );
 }
