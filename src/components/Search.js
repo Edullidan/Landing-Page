@@ -7,44 +7,30 @@ const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
 `;
+const StyledUl = styled.ul`
+  padding: 0;
+`;
 
-const StyledList = styled.ul`
+const StyledList = styled.li`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
   border: 1px solid black;
-  border-collapse: collapse;
-  width: 100%;
-  text-align: center;
-  border-bottom: 1px solid black;
-  background-color: #195135;
-  justify-content: space-between;
-  align-items: flex-end;
-  letter-spacing: 0.15px;
-`;
-
-const StyledInput = styled.input`
-  display: block;
-  font-size: 1.1rem;
-  background-color: #3b3b4f;
-  color: white;
-  padding: 5px;
-  border: none;
-`;
-
-const StyledButton = styled.button`
-  padding: 2px;
-  border: 1px solid #ccc;
+  padding: 10px;
   background-color: #195135;
   color: white;
+  margin-bottom: 10px;
 `;
 
 const StyledLink = styled(Link)`
-  text-decoration: black;
+  color: white;
 `;
 
 function Search({ repositories, setRepositories }) {
   const [search, setSearch] = useState("");
   const debounceSearchForm = useDebounce(search, 300);
 
-  const handlePoisk = useCallback(async () => {
+  const handleSearch = useCallback(async () => {
     const response = await fetch(
       `https://api.github.com/search/repositories?q=${search}`
     );
@@ -55,31 +41,31 @@ function Search({ repositories, setRepositories }) {
 
   useEffect(() => {
     if (debounceSearchForm) {
-      handlePoisk();
+      handleSearch();
     }
-  }, [debounceSearchForm, handlePoisk]);
+  }, [debounceSearchForm, handleSearch]);
 
   return (
     <StyledDiv>
       <h1>Repository search</h1>
-      <StyledInput
+      <input
         type='text'
         value={search}
         onChange={(e) => {
           setSearch(e.target.value);
         }}
-      ></StyledInput>
-      <StyledButton type='submit' onClick={handlePoisk}>
+      />
+      <button type='submit' onClick={handleSearch}>
         Search
-      </StyledButton>
-      <StyledList>
+      </button>
+      <StyledUl>
         {repositories &&
           repositories.map((repo) => (
-            <li key={repo.id}>
+            <StyledList key={repo.id}>
               <StyledLink to={`/repo/${repo.id}`}>{repo.name}</StyledLink>
-            </li>
+            </StyledList>
           ))}
-      </StyledList>
+      </StyledUl>
     </StyledDiv>
   );
 }
