@@ -12,14 +12,16 @@ const StyledUl = styled.ul`
 `;
 
 const StyledList = styled.li`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
+  display: flex;
+  flex-direction: column;
   border: 1px solid black;
   padding: 10px;
   background-color: #195135;
   color: white;
   margin-bottom: 10px;
+  width: 200px;
+  height: 50px;
+  border-radius: 20px;
 `;
 
 const StyledLink = styled(Link)`
