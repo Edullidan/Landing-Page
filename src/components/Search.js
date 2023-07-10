@@ -16,7 +16,7 @@ const StyledList = styled.li`
   flex-direction: column;
   border: 1px solid black;
   padding: 10px;
-  background-color: #195135;
+  background-color: #0c496b;
   color: white;
   margin-bottom: 10px;
   width: 200px;
