@@ -6,9 +6,18 @@ import styled from "styled-components";
 const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
+  background-color: black;
 `;
 const StyledUl = styled.ul`
-  padding: 0;
+    background-color:#1d1e1e;
+    margin-left: 700px;
+   
+    flex-direction:column
+    box-shadow: 8px 8px 8px #ddd;
+    border-radius:20px;
+    margin-top:1rem;
+    max-width: 350px;
+    
 `;
 
 const StyledList = styled.li`
@@ -25,6 +34,21 @@ const StyledList = styled.li`
 `;
 
 const StyledLink = styled(Link)`
+  color: white;
+`;
+const StyledInput = styled.input`
+  margin-left :760px
+
+
+}
+`;
+
+const StyledButton = styled.button`
+  border-radius: 5px;
+`;
+
+const StyledH1 = styled.h1`
+  margin-left: 750px;
   color: white;
 `;
 
@@ -49,17 +73,17 @@ function Search({ repositories, setRepositories }) {
 
   return (
     <StyledDiv>
-      <h1>Repository search</h1>
-      <input
+      <StyledH1>Repository search</StyledH1>
+      <StyledInput
         type='text'
         value={search}
         onChange={(e) => {
           setSearch(e.target.value);
         }}
       />
-      <button type='submit' onClick={handleSearch}>
+      <StyledButton type='submit' onClick={handleSearch}>
         Search
-      </button>
+      </StyledButton>
       <StyledUl>
         {repositories &&
           repositories.map((repo) => (
