@@ -6,12 +6,17 @@ import styled from "styled-components";
 const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
+
   background-color: black;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  border-radius: 10px;
 `;
 const StyledUl = styled.ul`
     background-color:#1d1e1e;
     margin-left: 700px;
-   
+     
     flex-direction:column
     box-shadow: 8px 8px 8px #ddd;
     border-radius:20px;
@@ -23,28 +28,28 @@ const StyledUl = styled.ul`
 const StyledList = styled.li`
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
   padding: 10px;
-  background-color: #0c496b;
-  color: white;
+  color: black;
   margin-bottom: 10px;
-  width: 200px;
+  width: 100%;
   height: 50px;
-  border-radius: 20px;
+  border-radius: 4px;
 `;
 
 const StyledLink = styled(Link)`
   color: white;
 `;
 const StyledInput = styled.input`
-  margin-left :760px
+ border-radius: 20px;  
+ background-color: #263238;
+ outline: none;
+ border: none;
+ color:white;
+margin-left :760px
 
+  
 
 }
-`;
-
-const StyledButton = styled.button`
-  border-radius: 5px;
 `;
 
 const StyledH1 = styled.h1`
@@ -52,9 +57,17 @@ const StyledH1 = styled.h1`
   color: white;
 `;
 
+const StyledButton = styled.button`
+  border-radius: 20px;
+  background-color: #263238;
+  outline: none;
+  border: none;
+  color: white;
+`;
+
 function Search({ repositories, setRepositories }) {
   const [search, setSearch] = useState("");
-  const debounceSearchForm = useDebounce(search, 300);
+  const debounceSearchForm = useDebounce(search, 100);
 
   const handleSearch = useCallback(async () => {
     const response = await fetch(
@@ -86,7 +99,7 @@ function Search({ repositories, setRepositories }) {
       </StyledButton>
       <StyledUl>
         {repositories &&
-          repositories.map((repo) => (
+          repositories.slice(0, 5).map((repo) => (
             <StyledList key={repo.id}>
               <StyledLink to={`/repo/${repo.id}`}>{repo.name}</StyledLink>
             </StyledList>

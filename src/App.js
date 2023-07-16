@@ -10,10 +10,6 @@ function App() {
   return (
     <Routes>
       <Route
-        path='/repo/:id'
-        element={<Repo repositories={repositories} />}
-      ></Route>
-      <Route
         path='/'
         element={
           <Search
@@ -21,6 +17,10 @@ function App() {
             setRepositories={setRepositories}
           />
         }
+      ></Route>
+      <Route
+        path='/repo/:id'
+        element={<Repo repositories={repositories} />}
       ></Route>
     </Routes>
   );
