@@ -15,13 +15,12 @@ const StyledDiv = styled.div`
 `;
 const StyledUl = styled.ul`
     background-color:#1d1e1e;
-    margin-left: 700px;
-     
+    margin-left: 727px;
     flex-direction:column
     box-shadow: 8px 8px 8px #ddd;
     border-radius:20px;
-    margin-top:1rem;
-    max-width: 350px;
+    margin-top: 0rem;
+    max-width: 300px;
     
 `;
 
@@ -40,34 +39,38 @@ const StyledLink = styled(Link)`
   color: white;
 `;
 const StyledInput = styled.input`
- border-radius: 20px;  
- background-color: #263238;
- outline: none;
- border: none;
- color:white;
-margin-left :760px
-
+border-radius: 10px 0px 0px 10px;  
+background-color: #263238;
+outline: none;
+border: none;
+color: white;
+margin-left: 725px;
+padding: 10px 20px;
+width: 300px; 
+font-size: 16px; 
   
 
 }
 `;
 
 const StyledH1 = styled.h1`
-  margin-left: 750px;
+  margin-left: 790px;
   color: white;
 `;
 
 const StyledButton = styled.button`
-  border-radius: 20px;
-  background-color: #263238;
+  border-radius: 0px 10px 10px 0px;
+  background-color: #504f4f;
   outline: none;
   border: none;
   color: white;
+  padding: 10px 20px;
+  font-size: 16px;
 `;
 
 function Search({ repositories, setRepositories }) {
   const [search, setSearch] = useState("");
-  const debounceSearchForm = useDebounce(search, 100);
+  const debounceSearchForm = useDebounce(search, 500);
 
   const handleSearch = useCallback(async () => {
     const response = await fetch(
@@ -87,6 +90,7 @@ function Search({ repositories, setRepositories }) {
   return (
     <StyledDiv>
       <StyledH1>Repository search</StyledH1>
+
       <StyledInput
         type='text'
         value={search}
