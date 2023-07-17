@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
 import useDebounce from "./useDebounce";
 import styled from "styled-components";
@@ -58,14 +59,14 @@ const StyledH1 = styled.h1`
   color: white;
 `;
 
-const StyledButton = styled.button`
-  border-radius: 0px 10px 10px 0px;
-  background-color: #504f4f;
-  outline: none;
+const SearchButton = styled.button`
   border: none;
+  border-radius: 0px 10px 10px 0px;
+  cursor: pointer;
   color: white;
-  padding: 10px 20px;
   font-size: 16px;
+  background-color: #504f4f;
+  padding: 10px 20px;
 `;
 
 function Search({ repositories, setRepositories }) {
@@ -86,7 +87,6 @@ function Search({ repositories, setRepositories }) {
       handleSearch();
     }
   }, [debounceSearchForm, handleSearch]);
-
   return (
     <StyledDiv>
       <StyledH1>Repository search</StyledH1>
@@ -98,9 +98,9 @@ function Search({ repositories, setRepositories }) {
           setSearch(e.target.value);
         }}
       />
-      <StyledButton type='submit' onClick={handleSearch}>
+      <SearchButton type='submit' onClick={handleSearch}>
         Search
-      </StyledButton>
+      </SearchButton>
       <StyledUl>
         {repositories &&
           repositories.slice(0, 5).map((repo) => (
