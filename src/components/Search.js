@@ -54,7 +54,7 @@ const StyledInput = styled.input`
   padding: 10px 20px;
   width: 300px;
   font-size: 16px;
-  margin-top: -300px; /* Decrease the value to move it higher */
+  margin-top: -300px;
 `;
 
 const StyledH1 = styled.h1`
